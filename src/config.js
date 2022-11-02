@@ -1,11 +1,11 @@
 exports.config = (() => {
   const defaultConfig = {
-    defaultSize: {
+    size: {
       width: 1200,
       height: 630,
     },
-    defaultWaitCondition: 'networkidle2',
-    componentGenerationDir: "__generated",
+    waitCondition: "networkidle2",
+    componentGenerationDir: "__og-image",
   };
 
   let currentConfig = {};
@@ -13,9 +13,9 @@ exports.config = (() => {
   return {
     init: (config) => {
       currentConfig = {
-        ...defaultConfig,
-        ...config,
-        defaultSize: { ...defaultConfig.defaultSize, ...(config.defaultSize || {}) },
+        size: config.size ?? defaultConfig.size,
+        waitCondition: config.waitCondition ?? defaultConfig.waitCondition,
+        componentGenerationDir: config.componentGenerationDir ?? defaultConfig.componentGenerationDir,
       };
     },
     getConfig: () => {

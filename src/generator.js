@@ -1,49 +1,49 @@
+const fs = require("fs/promises");
+const path = require("path");
+const http = require("http");
 const puppeteer = require("puppeteer");
 const express = require("express");
-const fs = require("fs");
-const http = require("http");
-const { join, dirname } = require("path");
 
-exports.generateOgImages = async (imageGenerationJobs) => {
-  const servingUrl = await getServingUrl();
+exports.generateOgImages = async (config) => {
+  const { size, waitCondition, componentGenerationDir } = config;
+  const rootDir = path.join("public", componentGenerationDir);
+
+  const servingUrl = await getServingUrl(rootDir);
+  const componentPaths = await getComponentPaths(rootDir);
+
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
 
-  for (const imageGenerationJob of imageGenerationJobs) {
-    const { componentPath, imgPath, size, waitCondition } = imageGenerationJob;
-    const componentUrl = `${servingUrl}/${componentPath}`;
-
+  for (const path of componentPaths) {
     await page.setViewport(size);
-    await page.goto(componentUrl, { 'waitUntil' : waitCondition });
+    await page.goto(`${servingUrl}/${rootDir}/${path}`, {
+      waitUntil: waitCondition,
+    });
+    await page.screenshot({
+      path: `${rootDir}/${path}.png`,
+      clip: { x: 0, y: 0, ...size },
+    });
 
-    ensureThatImageDirExists(imgPath);
-    await page.screenshot({ path: imgPath, clip: { x: 0, y: 0, ...size } });
-    // fs.unlinkSync(join("public", componentPath, "index.html"));
-
-    const printPath = `${imgPath.replace("public", "")} ${size.width}x${size.height}`;
-    console.log(`🖼  created Image: ${printPath}`);
+    console.log(`🖼 Created image at ${rootDir}/${path}.png`);
   }
 
   await browser.close();
 };
 
-const getServingUrl = async () => {
+const getServingUrl = async (dir) => {
   const app = express();
-  app.use(express.static("public"));
+
+  app.get(`/${dir}/:id`, async (req, res) => {
+    const file = path.join(`${path.resolve("./")}/${dir}`, req.params.id, "index.html");
+    res.sendFile(file);
+  });
+
   const server = http.createServer(app);
   await server.listen(0);
-  return `http://0.0.0.0:${server.address().port}/`;
 
+  return `http://0.0.0.0:${server.address().port}`;
 };
 
-const ensureThatImageDirExists = (path) => {
-  const targetDir = dirname(path);
-
-  try {
-    fs.statSync(targetDir);
-  } catch (err) {
-    if (err.code === "ENOENT") {
-      fs.mkdirSync(targetDir, { recursive: true });
-    }
-  }
+const getComponentPaths = async (dir) => {
+  return fs.readdir(`${path.resolve("./")}/${dir}`);
 };

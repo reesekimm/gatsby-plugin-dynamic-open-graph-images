@@ -2,26 +2,24 @@ const { join } = require("path");
 const { config } = require("./src/config");
 
 exports.createOpenGraphImage = (createPage, options) => {
-  config.init(options)
-  const { defaultSize, componentGenerationDir, defaultWaitCondition } = config.getConfig();
-  const { path, component, context } = options;
+  config.init(options);
 
-  const size = { ...defaultSize, ...(options.size || {}) };
-  const waitCondition = options.waitCondition ? options.waitCondition : defaultWaitCondition;
-  const componentPath = join(componentGenerationDir, encodeURIComponent(path.split("/").join("")));
-  const imgPath = join("public", path);
+  const { size, componentGenerationDir } = config.getConfig();
+  const { component, context } = options;
 
-  const generationContext = { componentPath, imgPath, size, waitCondition };
-  const ogImageMetaData = { path, size, __ogImageGenerationContext: generationContext };
+  const componentPath = `${componentGenerationDir}/${context.id}`;
+  const imagePath = join("public", componentGenerationDir, `${context.id}.png`);
+
+  const ogImageMetadata = { componentPath, imagePath, size };
 
   createPage({
     path: componentPath,
-    component: component,
+    component,
     context: {
       ...context,
-      ogImage: ogImageMetaData,
+      ogImage: ogImageMetadata,
     },
   });
 
-  return ogImageMetaData;
+  return ogImageMetadata;
 };
