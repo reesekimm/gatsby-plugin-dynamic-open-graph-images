@@ -4,11 +4,11 @@ const { config } = require("./src/config");
 exports.createOpenGraphImage = (createPage, options) => {
   config.init(options);
 
-  const { size, componentGenerationDir } = config.getConfig();
+  const { size, outputDir } = config.getConfig();
   const { component, context } = options;
 
-  const componentPath = `${componentGenerationDir}/${context.id}`;
-  const imagePath = join("public", componentGenerationDir, `${context.id}.png`);
+  const componentPath = `${outputDir}/${context.id}`;
+  const imagePath = join("public", outputDir, `${context.id}.png`);
 
   const ogImageMetadata = { componentPath, imagePath, size };
 

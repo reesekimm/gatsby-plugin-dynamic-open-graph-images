@@ -5,8 +5,8 @@ const puppeteer = require("puppeteer");
 const express = require("express");
 
 exports.generateOgImages = async (config) => {
-  const { size, waitCondition, componentGenerationDir } = config;
-  const rootDir = path.join("public", componentGenerationDir);
+  const { size, outputDir } = config;
+  const rootDir = path.join("public", outputDir);
 
   const servingUrl = await getServingUrl(rootDir);
   const componentPaths = await getComponentPaths(rootDir);
@@ -17,7 +17,7 @@ exports.generateOgImages = async (config) => {
   for (const path of componentPaths) {
     await page.setViewport(size);
     await page.goto(`${servingUrl}/${rootDir}/${path}`, {
-      waitUntil: waitCondition,
+      waitUntil: "networkidle2",
     });
     await page.screenshot({
       path: `${rootDir}/${path}.png`,
