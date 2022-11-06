@@ -2,13 +2,19 @@
 
 A [Gatsby](https://github.com/gatsbyjs/gatsby) plugin to derive and generate images for the [Open Graph Protocol](https://ogp.me/) directly from React Components.
 
-<br />
+---
 
 **📌 NOTICE**
+
+<br />
+
 This plugin originates from [gatsby-plugin-open-graph-images](https://github.com/squer-solutions/gatsby-plugin-open-graph-images) and uses the same [approach](https://dev.to/duffleit/bridging-the-gap-between-gatsby-and-open-graph-images-52gh) - deriving open graph images from React components and integrating their creation into the Gatsby build pipeline.
 
-> The idea is awesome but it didn't work as I expected. I figured out gatsby-plugin-open-graph-images uses Gatsby cache to manage open-graph image metadata and the cache is not updated correctly.
-> After several tries, I decided to change the internal implementation based on file system. Hope this can help anyone who struggles with cache issue.
+The idea is awesome but it didn't work as I expected. I figured out gatsby-plugin-open-graph-images uses Gatsby cache to manage open-graph image metadata and the cache is not updated correctly.
+
+After several tries, I decided to change the internal implementation based on file system. Hope this can help anyone who struggles with cache issue.
+
+---
 
 <br />
 
@@ -124,6 +130,7 @@ npm i gatsby-plugin-dynamic-open-graph-images
 ### `createOpenGraphImage(createPage, options)`
 
 <br />
+
 #### Parameters
 
 | parameter  | Required | description                                                                                          |
