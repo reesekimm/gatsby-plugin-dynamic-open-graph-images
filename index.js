@@ -8,7 +8,7 @@ exports.createOpenGraphImage = (createPage, options) => {
   const { component, context } = options;
 
   const componentPath = `${outputDir}/${context.id}`;
-  const imagePath = join("public", outputDir, `${context.id}.png`);
+  const imagePath = join(outputDir, `${context.id}.png`);
 
   const ogImageMetadata = { componentPath, imagePath, size };
 
