@@ -1,6 +1,8 @@
-name: Publish
+name: NPM Publish
 on:
   push:
+    branches:
+      - master
     tags:
       - v*.*.*
 jobs:
