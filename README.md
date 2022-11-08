@@ -1,5 +1,8 @@
 # Gatsby plugin for dynamic open graph images
 
+[![npm](https://img.shields.io/npm/v/gatsby-plugin-dynamic-open-graph-images)](https://npmjs.org/package/gatsby-plugin-dynamic-open-graph-images "View this project on npm")
+[![npm](https://img.shields.io/npm/dw/gatsby-plugin-dynamic-open-graph-images)](https://npmjs.org/package/gatsby-plugin-dynamic-open-graph-images "View this project on npm")
+
 A [Gatsby](https://github.com/gatsbyjs/gatsby) plugin to derive and generate images for the [Open Graph Protocol](https://ogp.me/) directly from React Components.
 
 ---
