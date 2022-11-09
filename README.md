@@ -146,7 +146,7 @@ npm i gatsby-plugin-dynamic-open-graph-images
 | option      | Required | type                              | description                                                                                                   | default                       |
 | ----------- | -------- | --------------------------------- | ------------------------------------------------------------------------------------------------------------- | ----------------------------- |
 | `component` | O        | string                            | The absolute path of React component for open-graph iamge template. It receives context value as pageContext. | N/A                           |
-| `context`   | O        | object                            | Gatsby page context. **id preporty must be provided** to distinguish components/images.                       | N/A                           |
+| `context`   | O        | object                            | Gatsby page context. **id property must be provided** to distinguish components/images.                       | N/A                           |
 | `size`      | X        | { width: number, height: number } | The size for the generated image.                                                                             | `{ width: 1200, height: 630}` |
 | `outputDir` | X        | string                            | The directory where the rendered gatsby components are temporarily stored, to be later saved as images.       | `"__og-image"`                |
 
