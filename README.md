@@ -157,7 +157,7 @@ Open-graph image metadata
 ```
 {
   componentPath: '__og-image/c6f9bb',
-  imagePath: 'public/__og-image/c6f9bb.png',
+  imagePath: '__og-image/c6f9bb.png',
   size: { width: 1200, height: 630 }
 }
 ```
