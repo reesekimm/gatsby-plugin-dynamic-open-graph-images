@@ -45,5 +45,7 @@ const getServingUrl = async (dir) => {
 };
 
 const getComponentPaths = async (dir) => {
-  return fs.readdir(`${path.resolve("./")}/${dir}`);
+  fs.readdir(`${path.resolve("./")}/${dir}`, { withFileTypes: true }, (error, files) => {
+    return files.filter((item) => item.isDirectory())
+  });
 };
