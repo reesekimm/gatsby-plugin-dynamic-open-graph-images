@@ -45,5 +45,6 @@ const getServingUrl = async (dir) => {
 };
 
 const getComponentPaths = async (dir) => {
-  return fs.readdir(`${path.resolve("./")}/${dir}`);
+  const items = await fs.readdir(`${path.resolve("./")}/${dir}`, { withFileTypes: true });
+  return items.filter((item) => item.isDirectory()).map(item => item.name);
 };
