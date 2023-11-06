@@ -1,4 +1,3 @@
-const { join } = require("path");
 const { config } = require("./src/config");
 
 exports.createOpenGraphImage = (createPage, options) => {
@@ -8,7 +7,7 @@ exports.createOpenGraphImage = (createPage, options) => {
   const { component, context } = options;
 
   const componentPath = `${outputDir}/${context.id}`;
-  const imagePath = join(outputDir, `${context.id}.png`);
+  const imagePath = `${outputDir}/${context.id}.png`;
 
   const ogImageMetadata = { componentPath, imagePath, size };
 

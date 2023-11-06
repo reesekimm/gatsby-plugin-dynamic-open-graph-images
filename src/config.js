@@ -2,7 +2,7 @@ exports.config = (() => {
   const defaultConfig = {
     size: {
       width: 1200,
-      height: 630,
+      height: 520,
     },
     outputDir: "__og-image",
   };
